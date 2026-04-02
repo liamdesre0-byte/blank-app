@@ -1,0 +1,29 @@
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+
+st.title("Cosmological Area Evolution")
+
+# --- Slider for equation of state ---
+w = st.slider("Equation of State (w)", -1.2, 0.5, -1.0, step=0.01)
+
+# --- Time array (you control this) ---
+t = np.linspace(0.1, 10, 500)
+
+# --- Your physics function ---
+def area_evolution(t, w):
+    # Replace this with your actual solution
+    # Example placeholder:
+    a = t**(2 / (3 * (1 + w)))  # only valid in simple regimes!
+    return a**2  # area ∝ a^2
+
+A = area_evolution(t, w)
+
+# --- Plot ---
+fig, ax = plt.subplots()
+ax.plot(t, A)
+ax.set_xlabel("Cosmological Time")
+ax.set_ylabel("Area (arbitrary units)")
+ax.set_title(f"Area Evolution (w = {w})")
+
+st.pyplot(fig)
